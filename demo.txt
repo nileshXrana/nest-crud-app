@@ -1,0 +1,6 @@
+"id": 5,
+    "name": "adidas dominator",
+    "category": "football boots",
+    "description": "official adidas football shoes for world cup 2026",
+    "price": 15700,
+    "createdBy": "ck@gmail.com"
