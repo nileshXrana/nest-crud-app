@@ -22,3 +22,19 @@ export class CreateProductDto {
   @IsNotEmpty()
   createdBy: string;
 }
+
+export class GetProductDto{
+
+  @IsEmail()
+  @IsNotEmpty()
+  createdBy: string;
+
+}
+
+export class DeleteProductDto{
+
+  @IsString()
+  @IsNotEmpty()
+  id: string;
+
+}

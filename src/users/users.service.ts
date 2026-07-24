@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { User } from './interface/user.interface';
 import { CreateUserDto, LoginUserDto } from './dto/user.dto';
 import { randomUUID } from 'crypto';
@@ -7,18 +7,19 @@ import { randomUUID } from 'crypto';
 export class UsersService {
     users: User[] = [];
 
-    signUp(user: CreateUserDto): object {
-        const exists = this.users.find(u => u.email === user.email);
+    signUp(signupUser: CreateUserDto): object {
+        const exists = this.users.find(u => u.email === signupUser.email);
         if (exists) {
-            return {
-                status: "User already exists"
-            }
+            throw new ConflictException("User already exists")
+            // return {
+            //     status: 
+            // }
         }
         const newUser: User = {
             id: randomUUID(),
-            name: user.name,
-            email: user.email,
-            password: user.password,
+            name: signupUser.name,
+            email: signupUser.email,
+            password: signupUser.password,
         };
         this.users.push(newUser);
         return {
@@ -27,14 +28,14 @@ export class UsersService {
         }
     }
 
-    login(loginUserDto: LoginUserDto): object {
-        const user = this.users.find(u => u.email === loginUserDto.email);
+    login(loginUser: LoginUserDto): object {
+        const user = this.users.find(u => u.email === loginUser.email);
         if (!user) {
             return {
                 status: "user not registered"
             }
         }
-        if (user.password !== loginUserDto.password) {
+        if (user.password !== loginUser.password) {
             return {
                 status: "wrong password"
             }

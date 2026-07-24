@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Product } from './interface/product.interface';
 import { randomUUID } from 'crypto';
+import { CreateProductDto, DeleteProductDto } from './dto/product.dto';
 
 @Injectable()
 export class ProductsService {
@@ -10,10 +11,10 @@ export class ProductsService {
         if (createdBy) {
             return this.products.filter(p => p.createdBy === createdBy);
         }
-        return this.products;
+        return [];
     }
 
-    addProduct(product: Product): string {
+    addProduct(product: CreateProductDto): string {
         const id = randomUUID();
         const pro = { ...product, id };
         this.products.push(pro);
@@ -21,7 +22,7 @@ export class ProductsService {
         return "product added !"
     }
 
-    deleteProduct(product: Product): string {
+    deleteProduct(product: DeleteProductDto): string {
         const index = this.products.findIndex(p => p.id === product.id);
         if (index !== -1) {
             this.products.splice(index, 1);
