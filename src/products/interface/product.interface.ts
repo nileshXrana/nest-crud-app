@@ -1,8 +1,10 @@
 export interface Product {
-    id?: string;
+    id: string;
     name: string;
-    category: string;
-    description: string;
     price: number;
-    createdBy: string;
+    description: string;
+    show: boolean;
+    sellerName: string;
+    images: string[];
+    sellerId: string;
 }

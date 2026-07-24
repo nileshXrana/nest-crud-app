@@ -8,23 +8,28 @@ export class ProductsController {
     constructor(private readonly productsService: ProductsService) { }
 
     @Get()
-    getProducts(@Query('createdby') createdby: string): Product[] {
-        return this.productsService.getProducts(createdby);
+    getProducts(): Product[] {
+        return this.productsService.getProducts();
     }
 
     @Post()
-    addProduct(@Body() product: CreateProductDto): string {
+    addProduct(@Body() product: CreateProductDto): object {
         return this.productsService.addProduct(product);
     }
 
-    @Delete()
-    deleteProduct(@Body() product: DeleteProductDto): string {
-        return this.productsService.deleteProduct(product);
+    @Get(':id')
+    getProductsById(@Query('id') id: string): Product[] {
+        return this.productsService.getProductsById(id);
     }
 
-    @Put()
-    updateProduct(@Body() product: CreateProductDto): string {
-        return this.productsService.updateProduct(product);
-    }
+    // @Delete()
+    // deleteProduct(@Body() product: DeleteProductDto): string {
+    //     return this.productsService.deleteProduct(product);
+    // }
+
+    // @Put()
+    // updateProduct(@Body() product: CreateProductDto): string {
+    //     return this.productsService.updateProduct(product);
+    // }
 
 }

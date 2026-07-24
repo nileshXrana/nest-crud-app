@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsInt, IsOptional, IsEmail } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber, IsEmail, IsBoolean, IsArray } from 'class-validator';
 
 export class CreateProductDto {
 
@@ -6,32 +6,33 @@ export class CreateProductDto {
   @IsNotEmpty()
   name: string;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  category: string;
+  price: number;
 
   @IsString()
   @IsNotEmpty()
   description: string;
 
-  @IsInt()
+  @IsBoolean()
   @IsNotEmpty()
-  price: number;
+  show: boolean;
 
-  @IsEmail()
+  @IsString()
   @IsNotEmpty()
-  createdBy: string;
+  sellerName: string;
+
+  @IsArray()
+  @IsString({ each: true })
+  images: string[]
+
+  @IsString()
+  @IsNotEmpty()
+  sellerId: string
+
 }
 
-export class GetProductDto{
-
-  @IsEmail()
-  @IsNotEmpty()
-  createdBy: string;
-
-}
-
-export class DeleteProductDto{
+export class DeleteProductDto {
 
   @IsString()
   @IsNotEmpty()
