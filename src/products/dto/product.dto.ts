@@ -1,20 +1,24 @@
-
-import { IsEmail, IsString, IsNotEmpty, IsInt } from 'class-validator';
+import { IsString, IsNotEmpty, IsInt, IsOptional, IsEmail } from 'class-validator';
 
 export class CreateProductDto {
 
   @IsString()
-  name!: string;
+  @IsNotEmpty()
+  name: string;
 
   @IsString()
-  category!: string;
+  @IsNotEmpty()
+  category: string;
 
   @IsString()
-  description!: string;
+  @IsNotEmpty()
+  description: string;
 
   @IsInt()
-  price!: number;
+  @IsNotEmpty()
+  price: number;
 
   @IsEmail()
-  createdBy!: string;
+  @IsNotEmpty()
+  createdBy: string;
 }

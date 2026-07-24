@@ -6,13 +6,16 @@ import { randomUUID } from 'crypto';
 export class ProductsService {
     products: Product[] = []
 
-    getProducts(): Product[] {
+    getProducts(createdBy: string): Product[] {
+        if (createdBy) {
+            return this.products.filter(p => p.createdBy === createdBy);
+        }
         return this.products;
     }
 
     addProduct(product: Product): string {
-        const uuid = randomUUID();
-        const pro = { ...product, id: uuid };
+        const id = randomUUID();
+        const pro = { ...product, id };
         this.products.push(pro);
         console.log(pro);
         return "product added !"
@@ -36,17 +39,6 @@ export class ProductsService {
         } else {
             return "product not found !"
         }
-    }
-
-    getProductById(product: string) {
-
-        // const index = this.products.findIndex(p => p.id === product.id);
-        // if(index !== -1){
-        //     return this.products[index]
-        // }else{
-        //     return {status: "product not found !"}
-        // }
-        return ""
     }
 
 

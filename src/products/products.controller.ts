@@ -8,8 +8,10 @@ export class ProductsController {
     constructor(private readonly productsService: ProductsService) { }
 
     @Get()
-    getProducts(): Product[] {
-        return this.productsService.getProducts();
+    getProducts(
+        @Body() body: CreateProductDto,
+    ): Product[] {
+        return this.productsService.getProducts(body.createdBy);
     }
 
     @Post()
@@ -25,11 +27,6 @@ export class ProductsController {
     @Put()
     updateProduct(@Body() product: CreateProductDto): string {
         return this.productsService.updateProduct(product);
-    }
-
-    @Get(':id')
-    getProductById(@Param() id: string): string {
-        return this.productsService.getProductById(id);
     }
 
 }
