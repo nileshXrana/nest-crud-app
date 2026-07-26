@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Header, Body, Delete, Put, Param, Query } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { Product } from './interface/product.interface';
+import type { Product } from './interface/product.interface';
 import { CreateProductDto, DeleteProductDto } from './dto/product.dto';
 
 @Controller('products')
@@ -8,7 +8,10 @@ export class ProductsController {
     constructor(private readonly productsService: ProductsService) { }
 
     @Get()
-    getProducts(): Product[] {
+    getProducts(@Query('email') email?: string): Product[] {
+        if (email) {
+            return this.productsService.getProductsByEmail(email);
+        }
         return this.productsService.getProducts();
     }
 
@@ -18,8 +21,8 @@ export class ProductsController {
     }
 
     @Get(':id')
-    getProductsById(@Query('id') id: string): Product[] {
-        return this.productsService.getProductsById(id);
+    getProductById(@Param('id') id: string): Product {
+        return this.productsService.getProductById(id);
     }
 
     // @Delete()
