@@ -1,35 +1,65 @@
-import { IsString, IsNumber, IsArray, IsNotEmpty } from 'class-validator';
+import { IsString, IsNumber, IsArray, IsNotEmpty, IsOptional } from 'class-validator';
 
-export class OrderDto {
-    @IsString()
-    @IsNotEmpty()
-    status: string;
+export class OrderItemDto {
+  @IsString()
+  @IsNotEmpty()
+  id: string;
 
-    @IsString()
-    promoCode: string;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-    @IsNumber()
-    discountPercent: number;
+  @IsNumber()
+  @IsNotEmpty()
+  price: number;
 
-    @IsString()
-    @IsNotEmpty()
-    id: string;
+  @IsNumber()
+  @IsNotEmpty()
+  quantity: number;
 
-    @IsString()
-    @IsNotEmpty()
-    name: string;
+  @IsString()
+  @IsOptional()
+  description?: string;
 
-    @IsNumber()
-    @IsNotEmpty()
-    price: number;
+  @IsString()
+  @IsOptional()
+  image?: string;
 
-    @IsNumber()
-    @IsNotEmpty()
-    quantity: number;
+  @IsArray()
+  @IsOptional()
+  images?: string[];
 
-    @IsString()
-    image: string;
+  @IsString()
+  @IsNotEmpty()
+  sellerId: string;
 
-    @IsArray()
-    images: string[];
+  @IsString()
+  @IsNotEmpty()
+  status: string;
+
+  @IsString()
+  @IsOptional()
+  promoCode?: string;
+
+  @IsNumber()
+  @IsOptional()
+  discountPercent?: number;
+}
+
+export class CreateOrderDto {
+  @IsString()
+  @IsNotEmpty()
+  userId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  userName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  userEmail: string;
+
+  @IsArray()
+  @IsNotEmpty()
+  items: OrderItemDto[];
 }
