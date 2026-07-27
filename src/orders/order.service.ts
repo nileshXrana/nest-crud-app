@@ -4,18 +4,18 @@ import { Order } from './interface/order.interface';
 
 @Injectable()
 export class OrderService {
-  private orders: Order[] = [];
+  orders: Order[] = [];
 
-  addOrders(createOrderDto: CreateOrderDto): Order[] {
+  addOrders(order: CreateOrderDto): Order[] {
     const createdOrders: Order[] = [];
     const timestamp = Date.now();
-    
-    for (const item of createOrderDto.items) {
-      const order: Order = {
+
+    for (const item of order.items) {
+      const newOrder: Order = {
         id: item.id,
-        userId: createOrderDto.userId,
-        userName: createOrderDto.userName,
-        userEmail: createOrderDto.userEmail,
+        userId: order.userId,
+        userName: order.userName,
+        userEmail: order.userEmail,
         name: item.name,
         price: item.price,
         quantity: item.quantity,
@@ -28,8 +28,8 @@ export class OrderService {
         discountPercent: item.discountPercent || 0,
         createdAt: timestamp,
       };
-      this.orders.push(order);
-      createdOrders.push(order);
+      this.orders.push(newOrder);
+      createdOrders.push(newOrder);
     }
     return createdOrders;
   }

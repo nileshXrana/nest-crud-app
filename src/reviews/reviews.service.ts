@@ -5,7 +5,7 @@ import { randomUUID } from 'crypto';
 
 @Injectable()
 export class ReviewsService {
-  private reviews: Review[] = [];
+  reviews: Review[] = [];
 
   addReview(createReviewDto: CreateReviewDto): Review {
     const id = randomUUID();

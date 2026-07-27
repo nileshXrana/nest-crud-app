@@ -22,7 +22,9 @@ export class LoginService {
         return {
             status: "user logged in successfully",
             id: user.id,
-            role: user.role
+            name: user.name,
+            role: user.role,
+            
         };
     }
 
