@@ -5,7 +5,7 @@ import { Order } from './interface/order.interface';
 
 @Controller('orders')
 export class OrderController {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(private readonly orderService: OrderService) { }
 
   @Post()
   addOrder(@Body() createOrderDto: CreateOrderDto): Order[] {
