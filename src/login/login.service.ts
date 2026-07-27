@@ -24,7 +24,7 @@ export class LoginService {
             id: user.id,
             name: user.name,
             role: user.role,
-            
+
         };
     }
 
